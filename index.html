@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitGym | Performance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #09090b;
+            --card: #18181b;
+            --primary: #ec4899;
+        }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: white;
+            overflow-x: hidden;
+        }
+        .glass { 
+            background: rgba(24, 24, 27, 0.8); 
+            backdrop-filter: blur(12px); 
+            border: 1px solid rgba(63, 63, 70, 0.3); 
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #ec4899, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-press:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="min-h-screen pb-28">
+
+    <!-- Header Fixo -->
+    <header class="sticky top-0 z-40 w-full glass border-b border-zinc-800/50 p-5 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-extrabold tracking-tighter italic text-pink-500">VITGYM</h1>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">Elite Performance</p>
+        </div>
+        <div class="flex gap-3">
+            <div class="h-10 w-10 rounded-2xl bg-zinc-800 flex items-center justify-center border border-zinc-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-pink-500"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+            </div>
+        </div>
+    </header>
+
+    <main class="p-6 space-y-8">
+        <!-- Card de Saudação -->
+        <section class="space-y-2">
+            <h2 class="text-3xl font-bold">Olá, Atleta! 👋</h2>
+            <p class="text-zinc-400">Pronto para superar os teus limites hoje?</p>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="grid grid-cols-2 gap-4">
+            <div class="glass p-5 rounded-[2rem] space-y-1">
+                <span class="text-zinc-500 text-xs font-bold uppercase">Treinos</span>
+                <p class="text-2xl font-black">12</p>
+            </div>
+            <div class="glass p-5 rounded-[2rem] space-y-1">
+                <span class="text-zinc-500 text-xs font-bold uppercase">Kcal Total</span>
+                <p class="text-2xl font-black text-pink-500">4.8k</p>
+            </div>
+        </section>
+
+        <!-- Botão Principal -->
+        <button onclick="toggleModal(true)" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-5 rounded-[2rem] shadow-lg shadow-pink-500/20 btn-press transition-all flex items-center justify-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7v14"/></svg>
+            REGISTAR NOVO TREINO
+        </button>
+
+        <!-- Lista de Atividades -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-bold">Histórico Recente</h3>
+                <button class="text-pink-500 text-sm font-bold">Ver todos</button>
+            </div>
+            
+            <div id="workouts-container" class="space-y-3">
+                <!-- Placeholder se vazio -->
+                <div class="text-center py-10 text-zinc-600 italic text-sm">
+                    Ainda não tens treinos registados.
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Barra de Navegação Inferior -->
+    <nav class="fixed bottom-6 left-6 right-6 h-20 glass rounded-[2.5rem] flex items-center justify-around px-4 shadow-2xl z-50">
+        <button class="p-4 text-pink-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></button>
+        <button class="p-4 text-zinc-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></button>
+        <button class="p-4 text-zinc-500"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+    </nav>
+
+    <!-- Modal de Registo -->
+    <div id="modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[100] hidden items-end sm:items-center justify-center p-4">
+        <div class="glass w-full max-w-lg rounded-[3rem] p-8 space-y-6 mb-4 sm:mb-0 animate-in slide-in-from-bottom duration-300">
+            <div class="flex justify-between items-center">
+                <h2 class="text-2xl font-black">Novo Treino</h2>
+                <button onclick="toggleModal(false)" class="bg-zinc-800 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="workoutForm" class="space-y-5">
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-zinc-500 uppercase ml-2">Atividade</label>
+                    <select id="workoutType" class="w-full bg-zinc-800 border-none rounded-2xl p-4 outline-none focus:ring-2 focus:ring-pink-500 appearance-none">
+                        <option value="Musculação">Musculação</option>
+                        <option value="Cardio">Cardio / Corrida</option>
+                        <option value="Crossfit">Crossfit</option>
+                        <option value="Yoga">Yoga / Pilates</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-bold text-zinc-500 uppercase ml-2">Duração (minutos)</label>
+                    <input type="number" id="workoutDuration" placeholder="Ex: 45" class="w-full bg-zinc-800 border-none rounded-2xl p-4 outline-none focus:ring-2 focus:ring-pink-500" required>
+                </div>
+
+                <button type="submit" class="w-full bg-pink-500 text-white font-bold py-5 rounded-2xl shadow-xl shadow-pink-500/20 btn-press">
+                    GUARDAR TREINO
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('modal');
+        const container = document.getElementById('workouts-container');
+        const form = document.getElementById('workoutForm');
+
+        function toggleModal(show) {
+            modal.classList.toggle('hidden', !show);
+            if(show) modal.classList.add('flex');
+            else modal.classList.remove('flex');
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const type = document.getElementById('workoutType').value;
+            const duration = document.getElementById('workoutDuration').value;
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+
+            // Criar Card
+            const card = document.createElement('div');
+            card.className = "glass p-5 rounded-[2rem] flex items-center justify-between animate-in zoom-in duration-300";
+            card.innerHTML = `
+                <div class="flex items-center gap-4">
+                    <div class="h-12 w-12 rounded-2xl bg-pink-500/10 flex items-center justify-center text-xl">
+                        ${type === 'Cardio' ? '🏃‍♂️' : '💪'}
+                    </div>
+                    <div>
+                        <h4 class="font-bold">${type}</h4>
+                        <p class="text-xs text-zinc-500">Hoje às ${timeStr} • ${duration} min</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <span class="text-pink-500 font-black text-sm">+${Math.floor(duration * 7.5)}</span>
+                    <p class="text-[10px] text-zinc-600 font-bold uppercase tracking-tighter">KCAL</p>
+                </div>
+            `;
+
+            if (container.children[0] && container.children[0].classList.contains('text-center')) {
+                container.innerHTML = '';
+            }
+
+            container.prepend(card);
+            toggleModal(false);
+            form.reset();
+        });
+
+        // Fechar ao clicar fora
+        window.onclick = (e) => { if(e.target === modal) toggleModal(false); }
+    </script>
+</body>
+</html>
